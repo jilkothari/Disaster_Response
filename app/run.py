@@ -31,7 +31,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('df', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load("../classifier.pkl")
 
 
 @app.route('/')
