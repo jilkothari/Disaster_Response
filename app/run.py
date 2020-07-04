@@ -3,8 +3,6 @@ import plotly
 import pandas as pd
 import numpy as np
 
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
@@ -15,16 +13,6 @@ from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
-
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
-
-    return clean_tokens
 
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
@@ -135,11 +123,3 @@ def go():
         query=query,
         classification_result=classification_results
     )
-
-
-def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
-
-
-if __name__ == '__main__':
-    main()
